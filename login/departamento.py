@@ -1,6 +1,7 @@
 import psycopg2
 from datetime import datetime
 from funcionario import *
+#from dao import *
 
 class Departamento:
     def __init__(self,nome):
@@ -56,10 +57,9 @@ class Departamento:
 
 
 
-class departamentoDao:
+class departamentoDao():
 
-    def __init__(self):
-        self._conexao = "dbname=funcionario user=postgres password=postgres host=localhost port=5432"
+    def __init__(self):self._conexao = "dbname=funcionario user=postgres password=postgres host=localhost port=5432"
 
     def listar(self):
         con = psycopg2.connect(self._conexao)
@@ -106,8 +106,8 @@ class departamentoDao:
         con = psycopg2.connect(self._conexao)
         cursor = con.cursor()
         cursor.execute('SELECT * FROM departamento WHERE idDepartamento = %s',[cod])
-        #f = funcionarioDao().buscar(l[2])
         l = cursor.fetchone()
+        f = funcionarioDao().buscar(l[2])
         d = Departamento(l[1])
         d.funcionario=l[2]
         d.dtAtualizacao=l[3]

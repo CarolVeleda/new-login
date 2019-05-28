@@ -3,7 +3,6 @@ from datetime import datetime
 
 class Funcionario:
     def __init__(self,nome,email,senha,login):
-
         self._nome = nome
         self._email = email
         self._login = login

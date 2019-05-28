@@ -137,7 +137,7 @@ def depto_excluir(id):
 def proj_inserir():
     if request.method == "POST":
         nome = request.form["nome"]
-        dataPrevista=dataPrevista["dataPrevista"]
+        dataPrevista=request.form["dataPrevista"]
         cod=request.form["id"]
         
         p = Projeto(nome,dataPrevista)
@@ -152,6 +152,23 @@ def proj_inserir():
 
     return render_template('proj_form.html')
 
+
+
+@app.route('/p/listar')
+def proj_listar():
+    p = projetoDao().listar()
+    return render_template('proj_listar.html',plistar=p)
+
+
+@app.route('/p/detalhes/<id>')
+def proj_buscar(id):
+    pdao=projetoDao()
+    p=pdao.buscar_vinculo(id)
+    fdao = funcionarioDao().listar()
+    return render_template('proj_detalhes.html',p=p,flistar=fdao)
+
+
+#@app.route('/p/vincular/<id>')
 
 
 

@@ -78,3 +78,14 @@ insert into projeto (nome,dtprevista) VALUES ('projeto 1',to_date('28/05/2019','
 insert into funcionario (nome,email,login,senha,admin,idDepartamento) VALUES ('funcionario 6','funcionario6@gmail','f6','f6',FALSE,2);
 
 UPDATE Funcionario SET nome = 'funcionario 7', email = '7@gmail', idDepartamento = 2, login = '7', senha='7', admin=FALSE WHERE idFuncionario = 6;
+
+
+
+select f.idFuncionario,f.nome,f.email,f.login,f.admin,p.idProjeto,p.nome,p.dtPrevista
+	from funcionario f right outer join FuncProj fp
+	on f.idFuncionario=fp.idFuncionarioFK
+	left outer join projeto p
+	on fp.idProjetoFK=p.idProjeto
+	WHERE p.idProjeto = 2
+
+
